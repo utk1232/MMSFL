@@ -2,193 +2,270 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nominee Form</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #fff;
-            /* display: flex;
-            justify-content: center;
-            align-items: center; */
-            height: 100vh;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nominee Form</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff;
+      height: 100vh;
+      overflow-y: hidden;
+    }
 
-        .form-container {
-            width: 320px;
-            padding: 20px;
-            border-radius: 8px;
-            background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    .form-container {
+      width: 271px;
+      padding: 20px;
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-        form {
-            display: flex;
-            flex-direction: column;
-        }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
 
-        label {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #831c29;
-        }
+    label {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #831c29;
+    }
 
-        input,
-        select {
-            border: none;
-            border-bottom: 2px solid #b3696f;
-            padding: 8px 4px;
-            font-size: 16px;
-            margin-top: 5px;
-            outline: none;
-        }
+    input,
+    select {
+      border: none;
+      border-bottom: 2px solid #b3696f;
+      padding: 8px 4px;
+      font-size: 16px;
+      margin-top: 5px;
+      outline: none;
+    }
 
-        .button-group {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            width: 100%;
-        }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      width: 100%;
+    }
 
-        .add-btn,
-        .reset-btn {
-            padding: 12px 24px;
-            font-size: 16px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+    .add-btn,
+    .reset-btn {
+      padding: 12px 6px;
+      font-size: 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
 
-        .add-btn {
-            background-color: #e30429;
-            color: white;
-            border: none;
-            width: 48%;
-        }
+    .add-btn {
+      background-color: #e30429;
+      color: white;
+      border: none;
+      width: 48%;
+    }
 
-        .reset-btn {
-            background-color: white;
-            color: #e30429;
-            border: 2px solid #e30429;
-            width: 48%;
-        }
+    .reset-btn {
+      background-color: white;
+      color: #e30429;
+      border: 2px solid #e30429;
+      width: 48%;
+    }
 
-        .success-message {
-            color: green;
-            font-size: 18px;
-            text-align: center;
-            margin-top: 20px;
-        }
-    </style>
+    .success-message {
+      color: green;
+      font-size: 18px;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="form-container">
-        <!-- Form 1 - Nominee -->
-        <form class="form1" id="nomineeForm">
-            <label for="nominee-name">Name</label>
-            <input type="text" id="nominee-name" placeholder="Enter Nominee Name" required>
+  <div class="form-container">
+    <!-- Form 1 - Nominee -->
+    <form id="nomineeForm">
+      <label for="nominee-name">Name</label>
+      <input type="text" id="nominee-name" placeholder="Enter Nominee Name" required />
 
-            <label for="nominee-dob">Date of birth</label>
-            <input type="text" id="nominee-dob" placeholder="dd/mm/yy" required>
+      <label for="nominee-dob">Date of birth</label>
+      <input type="text" id="nominee-dob" placeholder="dd/mm/yy" required />
 
-            <label for="nominee-relation">Nominee’s relation with you</label>
-            <select id="nominee-relation" required>
-                <option>Father</option>
-                <option>Wife</option>
-                <option>Husband</option>
-                <option>Son</option>
-                <option>Daughter</option>
-                <option>Other</option>
-            </select>
+      <label for="nominee-relation">Nominee’s relation with you</label>
+      <select id="nominee-relation" required>
+        <option>Grandmother</option>
+        <option>Brother</option>
+        <option>Niece</option>
+        <option>Daughter</option>
+        <option>Father</option>
+        <option>Granddaughter</option>
+        <option>Husband</option>
+        <option>Mother</option>
+        <option>Nephew</option>
+        <option>Grandson</option>
+        <option>Son</option>
+        <option>Sister</option>
+        <option>Wife</option>
+        <option>Other</option>
+      </select>
 
-            <div class="button-group">
-                <button type="button" class="add-btn" onclick="checkDate(event)">Add Nominee</button>
+      <div class="button-group">
+        <button type="button" id="check-age-btn" class="add-btn">Add Nominee</button>
+        <button type="reset" class="reset-btn">Reset</button>
+      </div>
+    </form>
 
-                <button type="reset" class="reset-btn">Reset</button>
-            </div>
-        </form>
+    <!-- Form 2 - Guardian -->
+    <form id="guardianForm" style="display: none;">
+      <label for="guardian-name">Guardian Name</label>
+      <input type="text" id="guardian-name" required />
 
-        <!-- Form 2 - Guardian -->
-        <form class="form2" id="guardianForm" style="display: none;">
-            <label for="guardian-name">Guardian Name</label>
-            <input type="text" id="guardian-name" required>
+      <label for="guardian-dob">Date of birth</label>
+      <input type="text" id="guardian-dob" placeholder="dd/mm/yy" required />
 
-            <label for="guardian-dob">Date of birth</label>
-            <input type="text" id="guardian-dob" placeholder="dd/mm/yy" required>
+      <label for="guardian-relation">Guardian’s relation with nominee</label>
+      <select id="guardian-relation" required>
+        <option>Grandmother</option>
+        <option>Brother</option>
+        <option>Niece</option>
+        <option>Daughter</option>
+        <option>Father</option>
+        <option>Granddaughter</option>
+        <option>Husband</option>
+        <option>Mother</option>
+        <option>Nephew</option>
+        <option>Grandson</option>
+        <option>Son</option>
+        <option>Sister</option>
+        <option>Wife</option>
+        <option>Other</option>
+      </select>
 
-            <label for="guardian-relation">Guardian’s relation with nominee</label>
-            <select id="guardian-relation" required>
-                <option>Father</option>
-                <option>Wife</option>
-                <option>Husband</option>
-                <option>Son</option>
-                <option>Daughter</option>
-                <option>Other</option>
-            </select>
+      <label for="guardian-address">Address</label>
+      <input type="text" id="guardian-address" required />
 
-            <label for="guardian-address">Address</label>
-            <input type="text" id="guardian-address" required>
+      <div class="button-group">
+        <button type="button" id="submit-guardian" class="add-btn">Add Nominee</button>
+        <button type="reset" class="reset-btn">Reset</button>
+      </div>
+    </form>
 
-            <div class="button-group">
-                <button type="submit" class="add-btn">Add Nominee</button>
-                <button type="reset" class="reset-btn">Reset</button>
-            </div>
-        </form>
-
-        <!-- Success Message -->
-        <div class="success-message" id="successMessage" style="display: none;">
-            Nominee Added Successfully!
-        </div>
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage" style="display: none;">
+      Nominee Added Successfully!
     </div>
+  </div>
 
-    <!-- Flatpickr JS -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-        // Initialize Flatpickr
-        flatpickr("#nominee-dob", {
-            dateFormat: "d/m/y",
-            maxDate: "today"
-        });
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-        flatpickr("#guardian-dob", {
-            dateFormat: "d/m/y",
-            maxDate: "today"
-        });
+  <script>
+    
+    flatpickr("#nominee-dob", {
+      dateFormat: "d/m/y",
+      maxDate: "today",
+    });
 
-        function checkDate(event) {
-            event.preventDefault();
+    flatpickr("#guardian-dob", {
+      dateFormat: "d/m/y",
+      maxDate: "today",
+    });
 
-            const dobInput = document.getElementById("nominee-dob").value;
-            const [day, month, year] = dobInput.split('/').map(Number);
+    function calculateExactAge(day, month, year) {
+      const fullYear = year > 50 ? 1900 + year : 2000 + year;
+      const dob = new Date(fullYear, month - 1, day);
+      const today = new Date();
 
-            if (!day || !month || !year || year > 99) {
-                alert("Please enter a valid date in dd/mm/yy format (e.g., 15/08/07 for 15th August 2007)");
-                return;
-            }
+      let age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
 
-            // Assuming input year is 2-digit, convert it to 4-digit
-            const fullYear = year > 50 ? 1900 + year : 2000 + year;
-            const dob = new Date(fullYear, month - 1, day);
-            const today = new Date();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
 
-            const ageDiff = today - dob;
-            const age = Math.floor(ageDiff / (1000 * 60 * 60 * 24 * 365.25));
+      return age;
+    }
 
-            if (age < 18) {
+    function sendNomineeData() {
+      const name = $("#nominee-name").val();
+      const dob = $("#nominee-dob").val();
+      const relation = $("#nominee-relation").val();
 
-                document.getElementById("nomineeForm").style.display = "none";
-                document.getElementById("guardianForm").style.display = "flex";
-            } else {
+      console.log(dob,"nominee dob");
 
-                // document.getElementById("nomineeForm").style.display = "none";
-                document.getElementById("successMessage").style.display = "block";
-            }
-        }
-    </script>
+      const guardianName = $("#guardian-name").val();
+      const guardianDob = $("#guardian-dob").val();
+      const guardianRelation = $("#guardian-relation").val();
+      const guardianAddress = $("#guardian-address").val();
 
+      const [day, month, year] = dob.split("/").map(Number);
+      const age = calculateExactAge(day, month, year);
+    console.log(age,"calculate age")
 
+      let finalData;
+
+      if (age < 18) {
+        finalData = {
+
+          name: name,
+          dob: dob,
+          relation: relation,
+          guardianName: guardianName,
+          guardianDob: guardianDob,
+          guardianRelation: guardianRelation,
+          guardianAddress: guardianAddress,
+        };
+        console.log("Sending Guardian Details...", finalData);
+      } else {
+        finalData = {
+          name: name,
+          dob: dob,
+          relation: relation,
+        };
+        console.log("Sending Nominee Details...", finalData);
+      }
+
+      const message = {
+        event_code: "ym-client-event",
+        data: JSON.stringify({
+          event: {
+            code: "userdetails",
+            data: finalData,
+          },
+        }),
+      };
+
+      window.parent.postMessage(JSON.stringify(message), "*");
+    }
+
+    // Nominee form button click
+    $("#check-age-btn").click(function () {
+      const dobInput = $("#nominee-dob").val();
+      const [day, month, year] = dobInput.split("/").map(Number);
+
+      if (!day || !month || !year || year > 99) {
+        alert("Please enter a valid date in dd/mm/yy format (e.g., 15/08/07)");
+        return;
+      }
+
+      const age = calculateExactAge(day, month, year);
+
+      if (age < 18) {
+        $("#nomineeForm").hide();
+        $("#guardianForm").show();
+      } else {
+        $("#successMessage").show();
+        sendNomineeData();
+      }
+    });
+
+    // Guardian form submit
+    $("#submit-guardian").click(function () {
+      $("#successMessage").show();
+      sendNomineeData();
+    });
+  </script>
 </body>
 
 </html>
