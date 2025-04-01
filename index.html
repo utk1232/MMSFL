@@ -161,6 +161,11 @@
     .flatpickr-day {
         height: 36px !important;
     } */
+    .error-message {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+    }
   </style>
 </head>
 
@@ -170,33 +175,14 @@
     <form id="nomineeForm">
       <label for="nominee-name">Name</label>
       <input type="text" id="nominee-name" placeholder="Enter Nominee Name" required />
+      <div class="error-message" id="nominee-name-error"></div>
 
       <label for="nominee-dob">Date of birth</label>
       <input type="dob" id="nominee-dob" placeholder="dd/mm/yy" required />
+      <div class="error-message" id="nominee-dob-error"></div>
 
       <label for="nominee-relation">Nominee’s relation with you</label>
-      <!-- <div class="dropdown">
-        <button id="dropdownButton" type="button">
-          <span>Select an option</span>
-          <i class="arrow" id="arrowIcon"></i>
-        </button>
-        <div class="dropdown-content" id="dropdownContent">
-          <div data-value="1">Grandmother</div>
-          <div data-value="2">Brother</div>
-          <div data-value="3">Niece</div>
-          <div data-value="4">Daughter</div>
-          <div data-value="5">Father</div>
-          <div data-value="6">Granddaughter</div>
-          <div data-value="7">Husband</div>
-          <div data-value="1">Mother</div>
-          <div data-value="2">Nephew</div>
-          <div data-value="3">Grandson</div>
-          <div data-value="4">Son</div>
-          <div data-value="5">Sister</div>
-          <div data-value="6">Wife</div>
-          <div data-value="7">Other</div>
-        </div>
-      </div> -->
+
       <!-- Nominee's Relation Dropdown -->
       <div class="dropdown">
         <button id="dropdownButtonNominee" type="button">
@@ -230,49 +216,14 @@
     <form id="guardianForm" style="display: none;">
       <label for="guardian-name">Guardian Name</label>
       <input type="text" id="guardian-name" required />
+      <div class="error-message" id="guardian-name-error"></div>
 
       <label for="guardian-dob">Date of birth</label>
       <input type="text" id="guardian-dob" placeholder="dd/mm/yy" required />
+      <div class="error-message" id="guardian-dob-error"></div>
+
 
       <label for="guardian-relation">Guardian’s relation with nominee</label>
-      <!-- <select id="guardian-relation" required>
-        <option>Grandmother</option>
-        <option>Brother</option>
-        <option>Niece</option>
-        <option>Daughter</option>
-        <option>Father</option>
-        <option>Granddaughter</option>
-        <option>Husband</option>
-        <option>Mother</option>
-        <option>Nephew</option>
-        <option>Grandson</option>
-        <option>Son</option>
-        <option>Sister</option>
-        <option>Wife</option>
-        <option>Other</option>
-      </select> -->
-      <!-- <div class="dropdown">
-        <button id="dropdownButton1" type="button">
-          <span>Select an option</span>
-          <i class="arrow" id="arrowIcon"></i>
-        </button>
-        <div class="dropdown-content" id="dropdownContent">
-          <div data-value="1">Grandmother</div>
-          <div data-value="2">Brother</div>
-          <div data-value="3">Niece</div>
-          <div data-value="4">Daughter</div>
-          <div data-value="5">Father</div>
-          <div data-value="6">Granddaughter</div>
-          <div data-value="7">Husband</div>
-          <div data-value="1">Mother</div>
-          <div data-value="2">Nephew</div>
-          <div data-value="3">Grandson</div>
-          <div data-value="4">Son</div>
-          <div data-value="5">Sister</div>
-          <div data-value="6">Wife</div>
-          <div data-value="7">Other</div>
-        </div>
-      </div> -->
       <!-- Guardian's Relation Dropdown -->
       <div class="dropdown">
         <button id="dropdownButtonGuardian" type="button">
@@ -299,6 +250,7 @@
 
       <label for="guardian-address">Address</label>
       <input type="text" id="guardian-address" required />
+      <div class="error-message" id="guardian-address-error"></div>
 
       <div class="button-group">
         <button type="button" id="submit-guardian" class="add-btn">Add Nominee</button>
@@ -327,46 +279,6 @@
       dateFormat: "d/m/y",
       maxDate: "today",
     });
-
-    // document.getElementById("dropdownButton").addEventListener("click", function () {
-    //   let dropdown = document.getElementById("dropdownContent");
-    //   let arrow = document.getElementById("arrowIcon");
-
-    //   if (dropdown.style.display === "block") {
-    //     dropdown.style.display = "none";
-    //     arrow.classList.remove("rotate");
-    //   } else {
-    //     dropdown.style.display = "block";
-    //     arrow.classList.add("rotate");
-    //   }
-    // });
-
-    // document.querySelectorAll(".dropdown-content div").forEach(item => {
-    //   item.addEventListener("click", function () {
-    //     document.getElementById("dropdownButton").firstElementChild.innerText = this.innerText;
-    //     document.getElementById("dropdownButton").classList.add("selected");
-    //     document.getElementById("dropdownContent").style.display = "none";
-    //     document.getElementById("arrowIcon").classList.remove("rotate");
-    //   });
-    // });
-
-    // document.addEventListener("click", function (event) {
-    //   if (!event.target.closest(".dropdown")) {
-    //     document.getElementById("dropdownContent").style.display = "none";
-    //     document.getElementById("arrowIcon").classList.remove("rotate");
-    //   }
-    // });
-
-    // document.getElementById("nomineeForm").addEventListener("reset", function () {
-    //   const dropdownButton = document.getElementById("dropdownButton");
-    //   dropdownButton.firstElementChild.innerText = "Select an option";
-    //   dropdownButton.classList.remove("selected");
-
-    //   document.getElementById("successMessage").style.display = "none";
-    //   document.getElementById("guardianForm").style.display = "none";
-    //   document.getElementById("nomineeForm").style.display = "flex";
-    // });
-
     // Nominee Dropdown Logic
     document.getElementById("dropdownButtonNominee").addEventListener("click", function () {
       let dropdown = document.getElementById("dropdownContentNominee");
@@ -447,16 +359,19 @@
     }
 
     function validateNomineeForm() {
+
+      $(".error-message").text("");
+
       const name = $("#nominee-name").val().trim();
       const dob = $("#nominee-dob").val().trim();
 
       if (!isValidName(name)) {
-        alert("Please enter a valid nominee name (letters only).");
+        $("#nominee-name-error").text("Please enter a valid nominee name.");
         return false;
       }
 
       if (!dob.match(/^\d{2}\/\d{2}\/\d{2}$/)) {
-        alert("Please enter a valid DOB in dd/mm/yy format.");
+        $("#nominee-dob-error").text("Please enter DOB.");
         return false;
       }
 
@@ -464,22 +379,24 @@
     }
 
     function validateGuardianForm() {
+
+      $(".error-message").text("");
       const name = $("#guardian-name").val().trim();
       const dob = $("#guardian-dob").val().trim();
       const address = $("#guardian-address").val().trim();
 
       if (!isValidName(name)) {
-        alert("Please enter a valid guardian name (letters only).");
+        $("#guardian-name-error").text("Please enter guardian name.");
         return false;
       }
 
       if (!dob.match(/^\d{2}\/\d{2}\/\d{2}$/)) {
-        alert("Please enter a valid DOB in dd/mm/yy format.");
+        $("#guardian-dob-error").text("Please enter dob.");
         return false;
       }
 
       if (!isValidAddress(address)) {
-        alert("Please enter a valid address (minimum 5 characters).");
+        $("#guardian-address-error").text("Please enter address.");
         return false;
       }
 
@@ -494,8 +411,8 @@
       const nomineeData = { name, dob, relation };
       console.log("Nominee Data Sent to Server:", nomineeData);
 
-      $("#nomineeForm").trigger("reset");  
-      $("#dropdownButtonNominee span").text("Select Relation"); 
+      $("#nomineeForm").trigger("reset");
+      $("#dropdownButtonNominee span").text("Select Relation");
 
       $("#successMessage").show();
 
@@ -547,14 +464,15 @@
 
       window.parent.postMessage(JSON.stringify(message), "*");
 
-      $("#guardianForm").trigger("reset");  
-      $("#dropdownButtonGuardian span").text("Select Relation"); 
+      $("#guardianForm").trigger("reset");
+      $("#dropdownButtonGuardian span").text("Select Relation");
 
       $("#successMessage").show();
     }
 
     $("#check-age-btn").on("click", function () {
       if (!validateNomineeForm()) return;
+      $(this).prop("disabled", true);
 
       const dob = $("#nominee-dob").val();
       const [day, month, year] = dob.split("/").map(Number);
@@ -570,7 +488,7 @@
 
     $("#submit-guardian").on("click", function () {
       if (!validateGuardianForm()) return;
-
+      $(this).prop("disabled", true);
       sendGuardianData();
     });
   </script>
