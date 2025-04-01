@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nominee Form</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
   <style>
@@ -146,27 +145,23 @@
       left: 29px !important;
       width: 17%;
     }
-
     .flatpickr-weekdays {
-      width: 85% !important;
+        width: 85% !important;
     }
-
     .dayContainer {
-      width: 256.875px;
-      min-width: 204.875px;
-      max-width: 258.875px;
+        width: 256.875px;
+    min-width: 204.875px;
+    max-width: 258.875px;
     }
-
+  
     .flatpickr-months .flatpickr-month {
-      height: 30px !important;
+        height: 30px !important;
     }
-
     .flatpickr-day {
-      height: 36px !important;
+        height: 36px !important;
     } */
   </style>
 </head>
-
 <body>
   <div class="form-container">
     <!-- Form 1 - Nominee -->
@@ -213,7 +208,7 @@
       <input type="text" id="guardian-name" required />
 
       <label for="guardian-dob">Date of birth</label>
-      <input type="dob" id="guardian-dob" placeholder="dd/mm/yy" required />
+      <input type="text" id="guardian-dob" placeholder="dd/mm/yy" required />
 
       <label for="guardian-relation">Guardian’s relation with nominee</label>
       <select id="guardian-relation" required>
@@ -256,7 +251,7 @@
     flatpickr("#nominee-dob", {
       dateFormat: "d/m/y",
       maxDate: "today",
-
+    
     });
 
     flatpickr("#guardian-dob", {
@@ -404,7 +399,7 @@
       const age = calculateExactAge(day, month, year);
 
       if (age < 18) {
-        $("#nomineeForm").hide(); xxx
+        $("#nomineeForm").hide();
         $("#guardianForm").show();
       } else {
         sendNomineeData();
@@ -418,5 +413,4 @@
     });
   </script>
 </body>
-
 </html>
