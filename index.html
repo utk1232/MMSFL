@@ -494,7 +494,9 @@
       const nomineeData = { name, dob, relation };
       console.log("Nominee Data Sent to Server:", nomineeData);
 
-      // $("#nomineeForm").hide();
+      $("#nomineeForm").trigger("reset");  
+      $("#dropdownButtonNominee span").text("Select Relation"); 
+
       $("#successMessage").show();
 
 
@@ -544,6 +546,9 @@
       };
 
       window.parent.postMessage(JSON.stringify(message), "*");
+
+      $("#guardianForm").trigger("reset");  
+      $("#dropdownButtonGuardian span").text("Select Relation"); 
 
       $("#successMessage").show();
     }
