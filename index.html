@@ -1,12 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nominee Form</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
   <style>
+    .dropdown {
+      position: relative;
+      font-family: Arial, sans-serif;
+    }
+
+    .dropdown button {
+      width: 100%;
+      text-align: left;
+      background: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: none;
+      border-bottom: 2px solid #b3696f;
+      padding: 8px 4px;
+      font-size: 16px;
+      margin-top: 5px;
+      outline: none;
+      max-height: 150px;
+      scroll-behavior: smooth;
+      color: gray;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: white;
+      width: 100%;
+      border: 1px solid #ccc;
+      max-height: 150px;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .dropdown-content div {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .dropdown-content div:hover {
+      background: #f0f0f0;
+    }
+
+    .arrow {
+      border: solid black;
+      border-width: 0 2px 2px 0;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(45deg);
+      transition: transform 0.3s;
+    }
+
+    .rotate {
+      transform: rotate(225deg);
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #fff;
@@ -41,6 +97,8 @@
       font-size: 16px;
       margin-top: 5px;
       outline: none;
+      max-height: 150px;
+      scroll-behavior: smooth;
     }
 
     .button-group {
@@ -78,9 +136,34 @@
       text-align: center;
       margin-top: 20px;
     }
+
+    .selected {
+      color: black !important;
+    }
+
+    .flatpickr-calendar.animate.open {
+      left: 29px !important;
+      width: 17%;
+    }
+    .flatpickr-weekdays {
+        width: 85% !important;
+    }
+    .dayContainer {
+        width: 256.875px;
+    min-width: 204.875px;
+    max-width: 258.875px;
+    }
+    /* .flatpickr-months {
+        width: 75%;
+    } */
+    .flatpickr-months .flatpickr-month {
+        height: 30px !important;
+    }
+    .flatpickr-day {
+        height: 36px !important;
+    }
   </style>
 </head>
-
 <body>
   <div class="form-container">
     <!-- Form 1 - Nominee -->
@@ -89,25 +172,31 @@
       <input type="text" id="nominee-name" placeholder="Enter Nominee Name" required />
 
       <label for="nominee-dob">Date of birth</label>
-      <input type="text" id="nominee-dob" placeholder="dd/mm/yy" required />
+      <input type="dob" id="nominee-dob" placeholder="dd/mm/yy" required />
 
       <label for="nominee-relation">Nominee’s relation with you</label>
-      <select id="nominee-relation" required>
-        <option>Grandmother</option>
-        <option>Brother</option>
-        <option>Niece</option>
-        <option>Daughter</option>
-        <option>Father</option>
-        <option>Granddaughter</option>
-        <option>Husband</option>
-        <option>Mother</option>
-        <option>Nephew</option>
-        <option>Grandson</option>
-        <option>Son</option>
-        <option>Sister</option>
-        <option>Wife</option>
-        <option>Other</option>
-      </select>
+      <div class="dropdown">
+        <button id="dropdownButton" type="button">
+          <span>Select an option</span>
+          <i class="arrow" id="arrowIcon"></i>
+        </button>
+        <div class="dropdown-content" id="dropdownContent">
+          <div data-value="1">Grandmother</div>
+          <div data-value="2">Brother</div>
+          <div data-value="3">Niece</div>
+          <div data-value="4">Daughter</div>
+          <div data-value="5">Father</div>
+          <div data-value="6">Granddaughter</div>
+          <div data-value="7">Husband</div>
+          <div data-value="1">Mother</div>
+          <div data-value="2">Nephew</div>
+          <div data-value="3">Grandson</div>
+          <div data-value="4">Son</div>
+          <div data-value="5">Sister</div>
+          <div data-value="6">Wife</div>
+          <div data-value="7">Other</div>
+        </div>
+      </div>
 
       <div class="button-group">
         <button type="button" id="check-age-btn" class="add-btn">Add Nominee</button>
@@ -161,15 +250,54 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <script>
-    
     flatpickr("#nominee-dob", {
       dateFormat: "d/m/y",
       maxDate: "today",
+    
     });
 
     flatpickr("#guardian-dob", {
       dateFormat: "d/m/y",
       maxDate: "today",
+    });
+
+    document.getElementById("dropdownButton").addEventListener("click", function () {
+      let dropdown = document.getElementById("dropdownContent");
+      let arrow = document.getElementById("arrowIcon");
+
+      if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+        arrow.classList.remove("rotate");
+      } else {
+        dropdown.style.display = "block";
+        arrow.classList.add("rotate");
+      }
+    });
+
+    document.querySelectorAll(".dropdown-content div").forEach(item => {
+      item.addEventListener("click", function () {
+        document.getElementById("dropdownButton").firstElementChild.innerText = this.innerText;
+        document.getElementById("dropdownButton").classList.add("selected");
+        document.getElementById("dropdownContent").style.display = "none";
+        document.getElementById("arrowIcon").classList.remove("rotate");
+      });
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest(".dropdown")) {
+        document.getElementById("dropdownContent").style.display = "none";
+        document.getElementById("arrowIcon").classList.remove("rotate");
+      }
+    });
+
+    document.getElementById("nomineeForm").addEventListener("reset", function () {
+      const dropdownButton = document.getElementById("dropdownButton");
+      dropdownButton.firstElementChild.innerText = "Select an option";
+      dropdownButton.classList.remove("selected");
+
+      document.getElementById("successMessage").style.display = "none";
+      document.getElementById("guardianForm").style.display = "none";
+      document.getElementById("nomineeForm").style.display = "flex";
     });
 
     function calculateExactAge(day, month, year) {
@@ -187,85 +315,104 @@
       return age;
     }
 
+    function isValidName(name) {
+      return /^[A-Za-z\s]{2,50}$/.test(name);
+    }
+
+    function isValidAddress(address) {
+      return address.trim().length >= 5;
+    }
+
+    function validateNomineeForm() {
+      const name = $("#nominee-name").val().trim();
+      const dob = $("#nominee-dob").val().trim();
+
+      if (!isValidName(name)) {
+        alert("Please enter a valid nominee name (letters only).");
+        return false;
+      }
+
+      if (!dob.match(/^\d{2}\/\d{2}\/\d{2}$/)) {
+        alert("Please enter a valid DOB in dd/mm/yy format.");
+        return false;
+      }
+
+      return true;
+    }
+
+    function validateGuardianForm() {
+      const name = $("#guardian-name").val().trim();
+      const dob = $("#guardian-dob").val().trim();
+      const address = $("#guardian-address").val().trim();
+
+      if (!isValidName(name)) {
+        alert("Please enter a valid guardian name (letters only).");
+        return false;
+      }
+
+      if (!dob.match(/^\d{2}\/\d{2}\/\d{2}$/)) {
+        alert("Please enter a valid DOB in dd/mm/yy format.");
+        return false;
+      }
+
+      if (!isValidAddress(address)) {
+        alert("Please enter a valid address (minimum 5 characters).");
+        return false;
+      }
+
+      return true;
+    }
+
     function sendNomineeData() {
       const name = $("#nominee-name").val();
       const dob = $("#nominee-dob").val();
-      const relation = $("#nominee-relation").val();
+      const relation = $("#dropdownButton span").text();
 
-      console.log(dob,"nominee dob");
+      const nomineeData = { name, dob, relation };
+      console.log("Nominee Data Sent to Server:", nomineeData);
 
+      $("#nomineeForm").hide();
+      $("#successMessage").show();
+    }
+
+    function sendGuardianData() {
       const guardianName = $("#guardian-name").val();
       const guardianDob = $("#guardian-dob").val();
       const guardianRelation = $("#guardian-relation").val();
       const guardianAddress = $("#guardian-address").val();
 
-      const [day, month, year] = dob.split("/").map(Number);
-      const age = calculateExactAge(day, month, year);
-    console.log(age,"calculate age")
-
-      let finalData;
-
-      if (age < 18) {
-        finalData = {
-
-          name: name,
-          dob: dob,
-          relation: relation,
-          guardianName: guardianName,
-          guardianDob: guardianDob,
-          guardianRelation: guardianRelation,
-          guardianAddress: guardianAddress,
-        };
-        console.log("Sending Guardian Details...", finalData);
-      } else {
-        finalData = {
-          name: name,
-          dob: dob,
-          relation: relation,
-        };
-        console.log("Sending Nominee Details...", finalData);
-      }
-
-      const message = {
-        event_code: "ym-client-event",
-        data: JSON.stringify({
-          event: {
-            code: "userdetails",
-            data: finalData,
-          },
-        }),
+      const guardianData = {
+        guardianName,
+        guardianDob,
+        guardianRelation,
+        guardianAddress,
       };
+      console.log("Guardian Data Sent to Server:", guardianData);
 
-      window.parent.postMessage(JSON.stringify(message), "*");
+      $("#guardianForm").hide();
+      $("#successMessage").show();
     }
 
-    // Nominee form button click
-    $("#check-age-btn").click(function () {
-      const dobInput = $("#nominee-dob").val();
-      const [day, month, year] = dobInput.split("/").map(Number);
+    $("#check-age-btn").on("click", function () {
+      if (!validateNomineeForm()) return;
 
-      if (!day || !month || !year || year > 99) {
-        alert("Please enter a valid date in dd/mm/yy format (e.g., 15/08/07)");
-        return;
-      }
-
+      const dob = $("#nominee-dob").val();
+      const [day, month, year] = dob.split("/").map(Number);
       const age = calculateExactAge(day, month, year);
 
       if (age < 18) {
         $("#nomineeForm").hide();
         $("#guardianForm").show();
       } else {
-        $("#successMessage").show();
         sendNomineeData();
       }
     });
 
-    // Guardian form submit
-    $("#submit-guardian").click(function () {
-      $("#successMessage").show();
-      sendNomineeData();
+    $("#submit-guardian").on("click", function () {
+      if (!validateGuardianForm()) return;
+
+      sendGuardianData();
     });
   </script>
 </body>
-
 </html>
