@@ -173,7 +173,7 @@
       <input type="dob" id="nominee-dob" placeholder="dd/mm/yy" required />
 
       <label for="nominee-relation">Nominee’s relation with you</label>
-      <div class="dropdown">
+      <!-- <div class="dropdown">
         <button id="dropdownButton" type="button">
           <span>Select an option</span>
           <i class="arrow" id="arrowIcon"></i>
@@ -194,8 +194,30 @@
           <div data-value="6">Wife</div>
           <div data-value="7">Other</div>
         </div>
-      </div>
-
+      </div> -->
+<!-- Nominee's Relation Dropdown -->
+<div class="dropdown">
+  <button id="dropdownButtonNominee" type="button">
+    <span>Select an option</span>
+    <i class="arrow" id="arrowIconNominee"></i>
+  </button>
+  <div class="dropdown-content" id="dropdownContentNominee">
+    <div data-value="1">Grandmother</div>
+    <div data-value="2">Brother</div>
+    <div data-value="3">Niece</div>
+    <div data-value="4">Daughter</div>
+    <div data-value="5">Father</div>
+    <div data-value="6">Granddaughter</div>
+    <div data-value="7">Husband</div>
+    <div data-value="8">Mother</div>
+    <div data-value="9">Nephew</div>
+    <div data-value="10">Grandson</div>
+    <div data-value="11">Son</div>
+    <div data-value="12">Sister</div>
+    <div data-value="13">Wife</div>
+    <div data-value="14">Other</div>
+  </div>
+</div>
       <div class="button-group">
         <button type="button" id="check-age-btn" class="add-btn">Add Nominee</button>
         <button type="reset" class="reset-btn">Reset</button>
@@ -211,7 +233,7 @@
       <input type="text" id="guardian-dob" placeholder="dd/mm/yy" required />
 
       <label for="guardian-relation">Guardian’s relation with nominee</label>
-      <select id="guardian-relation" required>
+      <!-- <select id="guardian-relation" required>
         <option>Grandmother</option>
         <option>Brother</option>
         <option>Niece</option>
@@ -226,8 +248,53 @@
         <option>Sister</option>
         <option>Wife</option>
         <option>Other</option>
-      </select>
-
+      </select> -->
+      <!-- <div class="dropdown">
+        <button id="dropdownButton1" type="button">
+          <span>Select an option</span>
+          <i class="arrow" id="arrowIcon"></i>
+        </button>
+        <div class="dropdown-content" id="dropdownContent">
+          <div data-value="1">Grandmother</div>
+          <div data-value="2">Brother</div>
+          <div data-value="3">Niece</div>
+          <div data-value="4">Daughter</div>
+          <div data-value="5">Father</div>
+          <div data-value="6">Granddaughter</div>
+          <div data-value="7">Husband</div>
+          <div data-value="1">Mother</div>
+          <div data-value="2">Nephew</div>
+          <div data-value="3">Grandson</div>
+          <div data-value="4">Son</div>
+          <div data-value="5">Sister</div>
+          <div data-value="6">Wife</div>
+          <div data-value="7">Other</div>
+        </div>
+      </div> -->
+    <!-- Guardian's Relation Dropdown -->
+<div class="dropdown">
+  <button id="dropdownButtonGuardian" type="button">
+    <span>Select an option</span>
+    <i class="arrow" id="arrowIconGuardian"></i>
+  </button>
+  <div class="dropdown-content" id="dropdownContentGuardian">
+    <div data-value="1">Grandmother</div>
+    <div data-value="2">Brother</div>
+    <div data-value="3">Niece</div>
+    <div data-value="4">Daughter</div>
+    <div data-value="5">Father</div>
+    <div data-value="6">Granddaughter</div>
+    <div data-value="7">Husband</div>
+    <div data-value="8">Mother</div>
+    <div data-value="9">Nephew</div>
+    <div data-value="10">Grandson</div>
+    <div data-value="11">Son</div>
+    <div data-value="12">Sister</div>
+    <div data-value="13">Wife</div>
+    <div data-value="14">Other</div>
+  </div>
+</div>
+    
       <label for="guardian-address">Address</label>
       <input type="text" id="guardian-address" required />
 
@@ -259,44 +326,100 @@
       maxDate: "today",
     });
 
-    document.getElementById("dropdownButton").addEventListener("click", function () {
-      let dropdown = document.getElementById("dropdownContent");
-      let arrow = document.getElementById("arrowIcon");
+    // document.getElementById("dropdownButton").addEventListener("click", function () {
+    //   let dropdown = document.getElementById("dropdownContent");
+    //   let arrow = document.getElementById("arrowIcon");
 
-      if (dropdown.style.display === "block") {
-        dropdown.style.display = "none";
-        arrow.classList.remove("rotate");
-      } else {
-        dropdown.style.display = "block";
-        arrow.classList.add("rotate");
-      }
-    });
+    //   if (dropdown.style.display === "block") {
+    //     dropdown.style.display = "none";
+    //     arrow.classList.remove("rotate");
+    //   } else {
+    //     dropdown.style.display = "block";
+    //     arrow.classList.add("rotate");
+    //   }
+    // });
 
-    document.querySelectorAll(".dropdown-content div").forEach(item => {
-      item.addEventListener("click", function () {
-        document.getElementById("dropdownButton").firstElementChild.innerText = this.innerText;
-        document.getElementById("dropdownButton").classList.add("selected");
-        document.getElementById("dropdownContent").style.display = "none";
-        document.getElementById("arrowIcon").classList.remove("rotate");
-      });
-    });
+    // document.querySelectorAll(".dropdown-content div").forEach(item => {
+    //   item.addEventListener("click", function () {
+    //     document.getElementById("dropdownButton").firstElementChild.innerText = this.innerText;
+    //     document.getElementById("dropdownButton").classList.add("selected");
+    //     document.getElementById("dropdownContent").style.display = "none";
+    //     document.getElementById("arrowIcon").classList.remove("rotate");
+    //   });
+    // });
 
-    document.addEventListener("click", function (event) {
-      if (!event.target.closest(".dropdown")) {
-        document.getElementById("dropdownContent").style.display = "none";
-        document.getElementById("arrowIcon").classList.remove("rotate");
-      }
-    });
+    // document.addEventListener("click", function (event) {
+    //   if (!event.target.closest(".dropdown")) {
+    //     document.getElementById("dropdownContent").style.display = "none";
+    //     document.getElementById("arrowIcon").classList.remove("rotate");
+    //   }
+    // });
 
-    document.getElementById("nomineeForm").addEventListener("reset", function () {
-      const dropdownButton = document.getElementById("dropdownButton");
-      dropdownButton.firstElementChild.innerText = "Select an option";
-      dropdownButton.classList.remove("selected");
+    // document.getElementById("nomineeForm").addEventListener("reset", function () {
+    //   const dropdownButton = document.getElementById("dropdownButton");
+    //   dropdownButton.firstElementChild.innerText = "Select an option";
+    //   dropdownButton.classList.remove("selected");
 
-      document.getElementById("successMessage").style.display = "none";
-      document.getElementById("guardianForm").style.display = "none";
-      document.getElementById("nomineeForm").style.display = "flex";
-    });
+    //   document.getElementById("successMessage").style.display = "none";
+    //   document.getElementById("guardianForm").style.display = "none";
+    //   document.getElementById("nomineeForm").style.display = "flex";
+    // });
+
+    // Nominee Dropdown Logic
+document.getElementById("dropdownButtonNominee").addEventListener("click", function () {
+  let dropdown = document.getElementById("dropdownContentNominee");
+  let arrow = document.getElementById("arrowIconNominee");
+
+  if (dropdown.style.display === "block") {
+    dropdown.style.display = "none";
+    arrow.classList.remove("rotate");
+  } else {
+    dropdown.style.display = "block";
+    arrow.classList.add("rotate");
+  }
+});
+
+document.querySelectorAll("#dropdownContentNominee div").forEach(item => {
+  item.addEventListener("click", function () {
+    document.getElementById("dropdownButtonNominee").firstElementChild.innerText = this.innerText;
+    document.getElementById("dropdownButtonNominee").classList.add("selected");
+    document.getElementById("dropdownContentNominee").style.display = "none";
+    document.getElementById("arrowIconNominee").classList.remove("rotate");
+  });
+});
+
+// Guardian Dropdown Logic
+document.getElementById("dropdownButtonGuardian").addEventListener("click", function () {
+  let dropdown = document.getElementById("dropdownContentGuardian");
+  let arrow = document.getElementById("arrowIconGuardian");
+
+  if (dropdown.style.display === "block") {
+    dropdown.style.display = "none";
+    arrow.classList.remove("rotate");
+  } else {
+    dropdown.style.display = "block";
+    arrow.classList.add("rotate");
+  }
+});
+
+document.querySelectorAll("#dropdownContentGuardian div").forEach(item => {
+  item.addEventListener("click", function () {
+    document.getElementById("dropdownButtonGuardian").firstElementChild.innerText = this.innerText;
+    document.getElementById("dropdownButtonGuardian").classList.add("selected");
+    document.getElementById("dropdownContentGuardian").style.display = "none";
+    document.getElementById("arrowIconGuardian").classList.remove("rotate");
+  });
+});
+
+// Close dropdown if clicked outside
+document.addEventListener("click", function (event) {
+  if (!event.target.closest(".dropdown")) {
+    document.getElementById("dropdownContentNominee").style.display = "none";
+    document.getElementById("arrowIconNominee").classList.remove("rotate");
+    document.getElementById("dropdownContentGuardian").style.display = "none";
+    document.getElementById("arrowIconGuardian").classList.remove("rotate");
+  }
+});
 
     function calculateExactAge(day, month, year) {
       const fullYear = year > 50 ? 1900 + year : 2000 + year;
@@ -364,22 +487,28 @@
     function sendNomineeData() {
       const name = $("#nominee-name").val();
       const dob = $("#nominee-dob").val();
-      const relation = $("#dropdownButton span").text();
+      const relation = $("#dropdownButtonNominee span").text();
 
       const nomineeData = { name, dob, relation };
       console.log("Nominee Data Sent to Server:", nomineeData);
 
-      $("#nomineeForm").hide();
+      // $("#nomineeForm").hide();
       $("#successMessage").show();
     }
 
     function sendGuardianData() {
+      const name = $("#nominee-name").val();
+      const dob = $("#nominee-dob").val();
+      const relation = $("#dropdownButtonNominee span").text();
+
       const guardianName = $("#guardian-name").val();
       const guardianDob = $("#guardian-dob").val();
-      const guardianRelation = $("#guardian-relation").val();
+      const guardianRelation = $("#dropdownButtonGuardian span").text();
+
       const guardianAddress = $("#guardian-address").val();
 
       const guardianData = {
+        name, dob, relation,
         guardianName,
         guardianDob,
         guardianRelation,
@@ -387,7 +516,7 @@
       };
       console.log("Guardian Data Sent to Server:", guardianData);
 
-      $("#guardianForm").hide();
+      // $("#guardianForm").hide();
       $("#successMessage").show();
     }
 
