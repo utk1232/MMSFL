@@ -234,7 +234,7 @@
  
     // Nominee Dropdown Logic
     document.getElementById("dropdownButtonNominee").addEventListener("click", function () {
-      let dropdown = document.getElementById("dropdownContentNominee");
+      let dropdown = document.getElementById("dropdownContentGuardian");
       let arrow = document.getElementById("arrowIconNominee");
 
       if (dropdown.style.display === "block") {
@@ -246,11 +246,11 @@
       }
     });
 
-    document.querySelectorAll("#dropdownContentNominee div").forEach(item => {
+    document.querySelectorAll("#dropdownContentGuardian div").forEach(item => {
       item.addEventListener("click", function () {
         document.getElementById("dropdownButtonNominee").firstElementChild.innerText = this.innerText;
         document.getElementById("dropdownButtonNominee").classList.add("selected");
-        document.getElementById("dropdownContentNominee").style.display = "none";
+        document.getElementById("dropdownContentGuardian").style.display = "none";
         document.getElementById("arrowIconNominee").classList.remove("rotate");
       });
     });
@@ -258,7 +258,7 @@
     // Close dropdown if clicked outside
     document.addEventListener("click", function (event) {
       if (!event.target.closest(".dropdown")) {
-        document.getElementById("dropdownContentNominee").style.display = "none";
+        document.getElementById("dropdownContentGuardian").style.display = "none";
         document.getElementById("arrowIconNominee").classList.remove("rotate");
   
       }
