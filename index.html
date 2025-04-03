@@ -190,20 +190,20 @@
           <i class="arrow" id="arrowIconNominee"></i>
         </button>
         <div class="dropdown-content" id="dropdownContentNominee">
-          <div data-value="1">Grandmother</div>
-          <div data-value="2">Brother</div>
-          <div data-value="3">Niece</div>
-          <div data-value="4">Daughter</div>
-          <div data-value="5">Father</div>
-          <div data-value="6">Granddaughter</div>
-          <div data-value="7">Husband</div>
-          <div data-value="8">Mother</div>
-          <div data-value="9">Nephew</div>
-          <div data-value="10">Grandson</div>
-          <div data-value="11">Son</div>
-          <div data-value="12">Sister</div>
-          <div data-value="13">Wife</div>
-          <div data-value="14">Other</div>
+          <div data-value="GRM">Grandmother</div>
+          <div data-value="BRO">Brother</div>
+          <div data-value="NEI">Niece</div>
+          <div data-value="DAU">Daughter</div>
+          <div data-value="FAT">Father</div>
+          <div data-value="GRD">Granddaughter</div>
+          <div data-value="HUS">Husband</div>
+          <div data-value="MOT">Mother</div>
+          <div data-value="NEP">Nephew</div>
+          <div data-value="GRS">Grandson</div>
+          <div data-value="SON">Son</div>
+          <div data-value="SIS">Sister</div>
+          <div data-value="WIF">Wife</div>
+          <div data-value="OTH">Other</div>
         </div>
       </div>
       <div class="button-group">
@@ -312,7 +312,8 @@
     function sendNomineeData() {
       const name = $("#nominee-name").val();
       const dob = $("#nominee-dob").val();
-      const relation = $("#dropdownButtonNominee span").text();
+      // const relation = $("#dropdownButtonNominee span").text();
+      const relation = $("#dropdownButtonGuardian span").attr("data-value");
 
       const nomineeData = { name, dob, relation };
       console.log("Nominee Data Sent to Server:", nomineeData);
