@@ -189,7 +189,7 @@
           <span>Select an option</span>
           <i class="arrow" id="arrowIconNominee"></i>
         </button>
-        <div class="dropdown-content" id="dropdownContentGuardian">
+        <div class="dropdown-content" id="dropdownContentNominees">
           <div data-value="GRM">Grandmother</div>
           <div data-value="BRO">Brother</div>
           <div data-value="NEI">Niece</div>
@@ -234,7 +234,7 @@
  
     // Nominee Dropdown Logic
     document.getElementById("dropdownButtonNominee").addEventListener("click", function () {
-      let dropdown = document.getElementById("dropdownContentGuardian");
+      let dropdown = document.getElementById("dropdownContentNominees");
       let arrow = document.getElementById("arrowIconNominee");
 
       if (dropdown.style.display === "block") {
@@ -246,11 +246,12 @@
       }
     });
 
-    document.querySelectorAll("#dropdownContentGuardian div").forEach(item => {
+    document.querySelectorAll("#dropdownContentNominees div").forEach(item => {
       item.addEventListener("click", function () {
         document.getElementById("dropdownButtonNominee").firstElementChild.innerText = this.innerText;
+        document.getElementById("dropdownButtonNominee").firstElementChild.setAttribute("data-value", this.getAttribute("data-value"));
         document.getElementById("dropdownButtonNominee").classList.add("selected");
-        document.getElementById("dropdownContentGuardian").style.display = "none";
+        document.getElementById("dropdownContentNominees").style.display = "none";
         document.getElementById("arrowIconNominee").classList.remove("rotate");
       });
     });
@@ -258,7 +259,7 @@
     // Close dropdown if clicked outside
     document.addEventListener("click", function (event) {
       if (!event.target.closest(".dropdown")) {
-        document.getElementById("dropdownContentGuardian").style.display = "none";
+        document.getElementById("dropdownContentNominees").style.display = "none";
         document.getElementById("arrowIconNominee").classList.remove("rotate");
   
       }
@@ -313,7 +314,7 @@
       const name = $("#nominee-name").val();
       const dob = $("#nominee-dob").val();
       // const relation = $("#dropdownButtonNominee span").text();
-      const relation = $("#dropdownButtonGuardian span").attr("data-value");
+      const relation = $("#dropdownButtonNominee span").attr("data-value");
 
       const nomineeData = { name, dob, relation };
       console.log("Nominee Data Sent to Server:", nomineeData);
