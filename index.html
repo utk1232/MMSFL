@@ -142,25 +142,7 @@
       color: black !important;
     }
 
-    /* .flatpickr-calendar.animate.open {
-      left: 29px !important;
-      width: 17%;
-    }
-    .flatpickr-weekdays {
-        width: 85% !important;
-    }
-    .dayContainer {
-        width: 256.875px;
-    min-width: 204.875px;
-    max-width: 258.875px;
-    }
   
-    .flatpickr-months .flatpickr-month {
-        height: 30px !important;
-    }
-    .flatpickr-day {
-        height: 36px !important;
-    } */
     .error-message {
       color: red;
       font-size: 12px;
@@ -181,7 +163,7 @@
       <input type="dob" id="nominee-dob" placeholder="dd/mm/yy" required />
       <div class="error-message" id="nominee-dob-error"></div>
 
-      <label for="nominee-relation">Nominee’s relation with you</label>
+      <label for="nominee-relation" id="nominee-relation">Nominee’s relation with you</label>
 
       <!-- Nominee's Relation Dropdown -->
       <div class="dropdown">
@@ -206,6 +188,7 @@
           <div data-value="OTH">Other</div>
         </div>
       </div>
+      <div id="nominee-relation-error" class="error-message" style="color: red;"></div>
       <div class="button-group">
         <button type="button" id="check-age-btn" class="add-btn">Add Nominee</button>
         <button type="reset" class="reset-btn">Reset</button>
@@ -294,6 +277,7 @@
 
       const name = $("#nominee-name").val().trim();
       const dob = $("#nominee-dob").val().trim();
+      const relationValue = $("#dropdownButtonNominee span").attr("data-value");
 
       if (!isValidName(name)) {
         $("#nominee-name-error").text("Please enter a valid nominee name.");
@@ -304,23 +288,32 @@
         $("#nominee-dob-error").text("Please enter DOB.");
         return false;
       }
-
+      if (!relationValue) {
+    $("#nominee-relation-error").text("Please select a relation.");
+    return false;
+  }
+    
       return true;
     }
 
-
+    $(".reset-btn").on("click", function () {
+  $("#dropdownButtonNominee span").text("Select an option");
+  $("#dropdownButtonNominee span").removeAttr("data-value");
+  $("#dropdownButtonNominee").removeClass("selected");
+  $("#nominee-relation-error").text(""); // Also clear any error message
+});
 
     function sendNomineeData() {
       const name = $("#nominee-name").val();
       const dob = $("#nominee-dob").val();
-      // const relation = $("#dropdownButtonNominee span").text();
+      // const relation = $("#dropdownContentNominees span").text();
       const relation = $("#dropdownButtonNominee span").attr("data-value");
 
       const nomineeData = { name, dob, relation };
       console.log("Nominee Data Sent to Server:", nomineeData);
 
-      $("#nomineeForm").trigger("reset");
-      $("#dropdownButtonNominee span").text("Select Relation");
+      // $("#nomineeForm").trigger("reset");
+      //$("#dropdownButtonNominee span").text("Select Relation");
 
       $("#successMessage").show();
 
@@ -347,7 +340,6 @@
       const dob = $("#nominee-dob").val();
       const [day, month, year] = dob.split("/").map(Number);
       const age = calculateExactAge(day, month, year);
-
       
         sendNomineeData();
       
