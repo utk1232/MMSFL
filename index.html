@@ -209,7 +209,7 @@
 
   <script>
     flatpickr("#nominee-dob", {
-      dateFormat: "d/m/y",
+      dateFormat: "d-m-Y",
       maxDate: "today",
 
     });
@@ -284,7 +284,7 @@
         return false;
       }
 
-      if (!dob.match(/^\d{2}\/\d{2}\/\d{2}$/)) {
+      if (!dob.match(/^\d{2}-\d{2}-\d{4}$/)) {
         $("#nominee-dob-error").text("Please enter DOB.");
         return false;
       }
